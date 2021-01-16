@@ -1,8 +1,7 @@
 import pandas as pd
 import numpy as np
-from model.encode import train_encode_library
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import precision_score
+from encode import train_encode_library
+from sklearn.metrics import precision_score, classification_report, accuracy_score, confusion_matrix
 
 def predict_function(sample, model):
     print("running")
@@ -15,23 +14,19 @@ def predict_function(sample, model):
     return y_pred
 
 def evaluate_function(sample, model):
-
     # IMPORTANT: USE THE SUITABLE ORIENT
     test = pd.DataFrame.from_dict(sample, orient='index')
-
     # separate features / label column here:
     X_test = test.iloc[:, :-1]
     y_test = test['income_>50K']
     print(X_test)
-
     # label encoder
     X_test_encoded = X_test.replace(train_encode_library, inplace=False)
-
     # predict
     y_pred = model.predict(X_test_encoded)
-
     # evaluate
     accuracy = accuracy_score(y_test, y_pred)
     precision = precision_score(y_test, y_pred, average='macro')
-
-    return accuracy, precision
+    report = classification_report(y_test, y_pred, output_dict = True)
+    cm = confusion_matrix(y_test, y_pred)
+    return accuracy, precision, report, cm

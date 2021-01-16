@@ -1,12 +1,13 @@
 import os
 import pickle
+from numpy.core.arrayprint import repr_format
 import pandas as pd
 import json
 from flask import Flask, jsonify, request
 import numpy as np
 from flask_controller import predict_function, evaluate_function
 
-MODEL_PATH = "model/pickle_model.pkl"
+MODEL_PATH = "../model/pickle_model.pkl"
 with open(MODEL_PATH, "rb") as rf:
     model = pickle.load(rf)
 
@@ -29,10 +30,11 @@ def predict():
     predictions = predict_function(sample, model)
     if is_json == '1':
         y_final = pd.DataFrame(data=predictions[0:],
-                               index=[str(i) for i in range(predictions.shape[0])],
+                               index=[str(i)
+                                      for i in range(predictions.shape[0])],
                                columns=["income_>50K"])
         predictions = json.loads(y_final.to_json(orient='index'))
-    else: 
+    else:
         predictions = predictions.tolist()
     result = {
         'prediction': predictions
@@ -43,13 +45,14 @@ def predict():
 @app.route("/evaluate", methods=["POST"])
 def evaluate():
     sample = request.get_json()
-    accuracy, precision = evaluate_function(sample, model)
+    accuracy, precision, report, cm = evaluate_function(sample, model)
     result = {
         'accuracy': accuracy,
-        'precision': precision
+        'precision': precision,
+        'report': report,
+        'confusion_matrix': cm.tolist()
     }
     return jsonify(result)
-
 
 # main
 if __name__ == '__main__':
