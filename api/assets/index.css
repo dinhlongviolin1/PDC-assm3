@@ -1,0 +1,89 @@
+.d-flex {
+    display: flex;
+}
+.align-items-center {
+    align-items: center;
+}
+.justify-content-center {
+    justify-content: center;
+}
+.header-margin-top {
+    margin-top: 10rem;
+}
+.fade-in {
+    opacity: 1;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 2s;
+}
+.full-screen-body {
+    background: rgb(30, 30, 30);
+    background: -moz-linear-gradient(90deg, rgba(30, 30, 30, 1) 0%, rgba(49, 47, 47, 1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(30, 30, 30, 1) 0%, rgba(49, 47, 47, 1) 100%);
+    background: linear-gradient(90deg, rgba(30, 30, 30, 1) 0%, rgba(49, 47, 47, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e1e1e",endColorstr="#312f2f",GradientType=1);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#312f2f",endColorstr="#312f2f",GradientType=1);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+}
+.flex-column {
+    flex-direction: column;
+}
+.main-intro-body {
+    width: 50%;
+    height: 100%;
+}
+.main-intro-body h1 {
+    font-size: 5rem;
+}
+.text-center {
+  text-align: center;
+}
+.mb-3 {
+  margin-bottom: 3rem;
+}
+.mr-2 {
+  margin-right: 2rem;
+}
+.mt-2 {
+  margin-top: 2.5rem;
+}
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 1200px) {
+    .main-intro-body button{
+        font-size: 0.9rem;
+    }
+    .main-intro-body {
+        width: 70%;
+    }
+    .main-intro-body h1 {
+        font-size: 3.5rem;
+    }
+    .main-intro-body h4 {
+        font-size: 2rem;
+    }
+}
+@media (max-width: 768px) {
+    .main-intro-body button{
+        font-size: 0.8rem;
+    }
+    .main-intro-body {
+        width: 90%;
+    }
+    .main-intro-body h1 {
+        font-size: 3rem;
+    }
+    .main-intro-body h4 {
+        font-size: 1.5rem;
+    }
+}
